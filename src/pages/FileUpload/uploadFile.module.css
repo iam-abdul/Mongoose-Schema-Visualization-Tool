@@ -1,0 +1,33 @@
+.fileUpload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  border: 2px dashed #aaa;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: #f8f8f8;
+}
+.filesList {
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+  /* padding: 20px; */
+}
+.filesList li {
+  /* delete cursor icon on hover */
+  display: flex;
+  align-items: center;
+  background-color: #252525;
+  color: white;
+  font-weight: normal;
+  font-size: 0.9rem;
+  width: fit-content;
+  padding: 5px 10px;
+  gap: 5px;
+  /* border-radius: 4px; */
+}
+.minimize {
+  display: none;
+}
