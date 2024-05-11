@@ -9,7 +9,7 @@ function App() {
   console.log("from app js", models);
   return (
     <>
-      {/* <FileUpload setModels={setModels} /> */}
+      <FileUpload setModels={setModels} />
       <Visualize models={models} />
     </>
   );

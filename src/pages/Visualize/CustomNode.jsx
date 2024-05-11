@@ -21,7 +21,11 @@ import PropTypes from "prop-types";
 // i have to handle sub documents
 // array of sub documents
 // sub document containing references
-const getValue = (value, depth) => {
+
+// handle unique
+// handle dates
+const getValue = (value, depth, model, key) => {
+  // console.log("value in getValue: ", value);
   if (typeof value === "object" && value !== null && !Array.isArray(value)) {
     if (value.type && value.type.toLowerCase() === "string") {
       if (value.required) {
@@ -36,14 +40,16 @@ const getValue = (value, depth) => {
       }
     } else if (
       value.type &&
-      value.type.toLowerCase() === "schema.types.objectid"
+      value.type.toLowerCase().includes("schema.types.objectid")
     ) {
       if (value.required) {
         return (
           <span style={{ position: "relative" }}>
             <span style={{ color: "red" }}>*</span>
-            {value.ref} (Id)
+            {value.ref} (_Id)
+            {console.log("id is here:", model + "-" + key)}
             <Handle
+              id={model + "-" + key}
               style={{ left: "101%" }}
               type="source"
               position={Position.Right}
@@ -52,38 +58,96 @@ const getValue = (value, depth) => {
         );
       } else {
         return (
-          <span>
-            <span>{value.ref} (Id)</span>
-            <Handle type="source" position={Position.Right} />
+          <span style={{ position: "relative" }}>
+            <span>{value.ref} (_Id)</span>
+            {console.log("id is here:", model + "-" + key)}
+            <Handle
+              id={model + "-" + key}
+              style={{ left: "101%" }}
+              type="source"
+              position={Position.Right}
+            />
           </span>
         );
       }
+    } else if (value.type && value.type.toLowerCase() === "objectid") {
+      return (
+        <span>
+          <span>{value.type}</span>
+        </span>
+      );
+    } else if (value.type && value.type.toLowerCase() === "number") {
+      if (value.required) {
+        return (
+          <span>
+            <span style={{ color: "red" }}>*</span>
+            Number
+          </span>
+        );
+      } else {
+        return <span>Number</span>;
+      }
+    } else if (value.type && value.type.toLowerCase() === "boolean") {
+      if (value.required) {
+        return (
+          <span>
+            <span style={{ color: "red" }}>*</span>
+            Boolean
+          </span>
+        );
+      } else {
+        return <span>Boolean</span>;
+      }
+    } else if (value.type && value.type.toLowerCase() === "date") {
+      if (value.required) {
+        return (
+          <span>
+            <span style={{ color: "red" }}>*</span>
+            Date
+          </span>
+        );
+      } else {
+        return <span>Date</span>;
+      }
     }
-
-    // return displaySchema(value);
   } else if (Array.isArray(value)) {
     return (
       <span style={{ backgroundColor: colors[depth], display: "flex" }}>
-        [ ] {getValue(value[0], depth)}
+        <span style={{ color: "#b0b0b0" }}> [ ] </span>{" "}
+        {getValue(value[0], depth, model, key)}
       </span>
     );
   }
 
-  return DisplaySchema(value, depth + 1);
+  return DisplaySchema(value, depth + 1, model + "-" + key);
 };
 
 // shades of grey
 const colors = ["transparent", "#272727", "#202020", "#d0d0d0", "#c0c0c0"];
 
-const DisplaySchema = (schema, depth) => {
+const DisplaySchema = (schema, depth, model) => {
   const color = colors[depth];
   return (
     <div style={{ backgroundColor: color }}>
       {Object.entries(schema).map(([key, value]) => {
         return (
           <div className={classes.contents} key={key}>
-            <span className={classes.keys}>{key}: </span>
-            <span className={classes.values}>{getValue(value, depth)}</span>
+            <span className={classes.keys}>
+              {key === "_id" ? (
+                <Handle
+                  style={{ right: "130%", left: "-30%" }}
+                  id={model + "-_id"}
+                  type="target"
+                  position={Position.Left}
+                />
+              ) : (
+                ""
+              )}{" "}
+              {key}:{" "}
+            </span>
+            <span className={classes.values}>
+              {getValue(value, depth, model, key)}
+            </span>
           </div>
         );
       })}
@@ -92,14 +156,16 @@ const DisplaySchema = (schema, depth) => {
 };
 
 function TextUpdaterNode({ data }) {
-  console.log("data in TextUpdaterNode: ", data);
+  // console.log("data in TextUpdaterNode: ", data);
   return (
     <div>
       <div className={classes.card}>
         <div className={classes.name}>
           <h3>{data.model}</h3>
         </div>
-        <div className={classes.schema}>{DisplaySchema(data.schema, 0)}</div>
+        <div className={classes.schema}>
+          {DisplaySchema(data.schema, 0, data.model.toLowerCase())}
+        </div>
       </div>
     </div>
   );

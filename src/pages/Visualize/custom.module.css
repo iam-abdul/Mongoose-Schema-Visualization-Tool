@@ -29,6 +29,7 @@
 
 .keys {
   color: #c2c2c2;
+  position: relative;
 }
 .values {
   color: #464646;
