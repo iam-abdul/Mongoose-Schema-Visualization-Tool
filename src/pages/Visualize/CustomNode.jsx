@@ -47,7 +47,6 @@ const getValue = (value, depth, model, key) => {
           <span style={{ position: "relative" }}>
             <span style={{ color: "red" }}>*</span>
             {value.ref} (_Id)
-            {console.log("id is here:", model + "-" + key)}
             <Handle
               id={model + "-" + key}
               style={{ left: "101%" }}
@@ -60,7 +59,6 @@ const getValue = (value, depth, model, key) => {
         return (
           <span style={{ position: "relative" }}>
             <span>{value.ref} (_Id)</span>
-            {console.log("id is here:", model + "-" + key)}
             <Handle
               id={model + "-" + key}
               style={{ left: "101%" }}
@@ -126,33 +124,44 @@ const getValue = (value, depth, model, key) => {
 const colors = ["transparent", "#272727", "#202020", "#d0d0d0", "#c0c0c0"];
 
 const DisplaySchema = (schema, depth, model) => {
-  const color = colors[depth];
-  return (
-    <div style={{ backgroundColor: color }}>
-      {Object.entries(schema).map(([key, value]) => {
-        return (
-          <div className={classes.contents} key={key}>
-            <span className={classes.keys}>
-              {key === "_id" ? (
-                <Handle
-                  style={{ right: "130%", left: "-30%" }}
-                  id={model + "-_id"}
-                  type="target"
-                  position={Position.Left}
-                />
-              ) : (
-                ""
-              )}{" "}
-              {key}:{" "}
-            </span>
-            <span className={classes.values}>
-              {getValue(value, depth, model, key)}
-            </span>
-          </div>
-        );
-      })}
-    </div>
-  );
+  try {
+    const color = colors[depth];
+    return (
+      <div style={{ backgroundColor: color }}>
+        {Object.entries(schema).map(([key, value]) => {
+          return (
+            <div className={classes.contents} key={key}>
+              <span className={classes.keys}>
+                {key === "_id" ? (
+                  <Handle
+                    style={{ right: "130%", left: "-30%" }}
+                    id={model + "-_id"}
+                    type="target"
+                    position={Position.Left}
+                  />
+                ) : (
+                  ""
+                )}{" "}
+                {key}:{" "}
+              </span>
+              <span className={classes.values}>
+                {getValue(value, depth, model, key)}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    );
+  } catch (err) {
+    console.error(
+      err,
+      `schema is: ${schema}
+    depth is: ${depth}
+    model is: ${model}
+    `
+    );
+    return <div>error</div>;
+  }
 };
 
 function TextUpdaterNode({ data }) {

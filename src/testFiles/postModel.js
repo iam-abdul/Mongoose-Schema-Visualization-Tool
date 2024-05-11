@@ -13,28 +13,30 @@ const comments = {
 };
 
 const postSchema = new Schema({
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-  },
-  content: {
-    type: String,
-    required: true,
-  },
-  comments,
-  otp: {
-    type: Number,
-    required: true,
-  },
-  metadata: {
-    device: {
-      type: String,
-    },
-    location: {
-      type: Schema.Types.ObjectId,
+  user: [
+    {
       ref: "User",
+      type: Schema.Types.ObjectId,
     },
-  },
+  ],
+  // content: {
+  //   type: String,
+  //   required: true,
+  // },
+  // comments,
+  // otp: {
+  //   type: Number,
+  //   required: true,
+  // },
+  // metadata: {
+  //   device: {
+  //     type: String,
+  //   },
+  //   location: {
+  //     type: Schema.Types.ObjectId,
+  //     ref: "User",
+  //   },
+  // },
 });
 
 const Post = mongoose.model("Post", postSchema);

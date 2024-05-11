@@ -81,9 +81,10 @@ export default function Visualize({ models }) {
 
   const extractEdges = (schema, nestedKeyPath, modelName) => {
     const edges = [];
+    console.log("came into extractEdges ", schema, nestedKeyPath, modelName);
     for (const key in schema) {
-      console.log("key: ", key);
-      if (schema[key] && schema[key].ref) {
+      if (schema[key] && schema[key].ref && !Array.isArray(schema[key])) {
+        console.log("came into ref ", schema[key]);
         edges.push({
           id: `${nestedKeyPath}-${key}`.toLocaleLowerCase(),
           source: modelName.toLocaleLowerCase(),
@@ -91,13 +92,32 @@ export default function Visualize({ models }) {
           sourceHandle: `${nestedKeyPath}-${key}`.toLocaleLowerCase(),
           targetHandle: `${schema[key].ref}-_id`.toLocaleLowerCase(),
         });
-      } else if (typeof schema[key] === "object") {
+      } else if (
+        typeof schema[key] === "object" &&
+        !Array.isArray(schema[key])
+      ) {
+        console.log("Came into object ", schema[key], nestedKeyPath);
         const nestedEdges = extractEdges(
           schema[key],
           `${nestedKeyPath}-${key}`,
           modelName
         );
-        console.log("nestedEdges: ", ...nestedEdges);
+        edges.push(...nestedEdges);
+      } else if (Array.isArray(schema[key])) {
+        console.log("Came into array ", schema[key][0], nestedKeyPath);
+
+        const nestedEdges = extractEdges(
+          { [key]: schema[key][0] },
+          `${nestedKeyPath}`,
+          modelName
+        );
+        console.log(
+          "after array ",
+          nestedEdges,
+          schema[key][0],
+          nestedKeyPath,
+          modelName
+        );
         edges.push(...nestedEdges);
       }
     }
@@ -114,8 +134,7 @@ export default function Visualize({ models }) {
     const flatEdges = initialEdges.flat();
 
     setEdges([...flatEdges]);
-
-    console.log("initialEdges: ", initialEdges);
+    console.log("initialNodes: ", initialNodes);
     console.log("flatEdges: ", flatEdges);
 
     // setEdges([
