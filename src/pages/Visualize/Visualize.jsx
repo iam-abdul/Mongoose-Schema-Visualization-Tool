@@ -58,6 +58,11 @@ export default function Visualize({ models }) {
                     required: true,
                   },
                 ],
+                pincode: {
+                  type: "Schema.Types.ObjectId",
+                  ref: "Tag",
+                  required: true,
+                },
               },
             },
           ],

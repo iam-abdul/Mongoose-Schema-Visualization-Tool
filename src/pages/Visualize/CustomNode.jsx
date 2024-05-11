@@ -62,10 +62,14 @@ const getValue = (value, depth) => {
 
     // return displaySchema(value);
   } else if (Array.isArray(value)) {
-    return <span>[ ] {getValue(value[0])}</span>;
+    return (
+      <span style={{ backgroundColor: colors[depth], display: "flex" }}>
+        [ ] {getValue(value[0], depth)}
+      </span>
+    );
   }
 
-  return DisplaySchema(value, depth);
+  return DisplaySchema(value, depth + 1);
 };
 
 // shades of grey
@@ -79,7 +83,7 @@ const DisplaySchema = (schema, depth) => {
         return (
           <div className={classes.contents} key={key}>
             <span className={classes.keys}>{key}: </span>
-            <span className={classes.values}>{getValue(value, depth + 1)}</span>
+            <span className={classes.values}>{getValue(value, depth)}</span>
           </div>
         );
       })}
