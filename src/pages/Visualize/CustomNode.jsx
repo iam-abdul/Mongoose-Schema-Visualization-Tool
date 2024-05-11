@@ -1,4 +1,4 @@
-// import { Handle, Position } from "reactflow";
+import { Handle, Position } from "reactflow";
 import classes from "./custom.module.css";
 import PropTypes from "prop-types";
 // const handleStyle = { left: 10 };
@@ -36,13 +36,23 @@ const getValue = (value) => {
     ) {
       if (value.required) {
         return (
-          <span>
+          <span style={{ position: "relative" }}>
             <span style={{ color: "red" }}>*</span>
             {value.ref} (Id)
+            <Handle
+              style={{ left: "101%" }}
+              type="source"
+              position={Position.Right}
+            />
           </span>
         );
       } else {
-        return <span>{value.ref} (Id)</span>;
+        return (
+          <span>
+            <span>{value.ref} (Id)</span>
+            <Handle type="source" position={Position.Right} />
+          </span>
+        );
       }
     }
 
