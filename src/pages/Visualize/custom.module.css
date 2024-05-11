@@ -1,0 +1,34 @@
+.card {
+  border: 1px solid rgb(219, 219, 219);
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px;
+}
+.name {
+  color: #fefefe;
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #464646;
+
+  border-bottom: solid 1px #fefefe;
+  width: 100%;
+}
+.contents {
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.keys {
+  color: #c2c2c2;
+}
+.values {
+  color: #464646;
+}

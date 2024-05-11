@@ -9,8 +9,8 @@ function App() {
   console.log("from app js", models);
   return (
     <>
-      <FileUpload setModels={setModels} />
-      {models.length > 0 ? <Visualize models={models} /> : ""}
+      {/* <FileUpload setModels={setModels} /> */}
+      <Visualize models={models} />
     </>
   );
 }
