@@ -1,6 +1,7 @@
 import { Handle, Position } from "reactflow";
 import classes from "./custom.module.css";
 import PropTypes from "prop-types";
+
 // const handleStyle = { left: 10 };
 // function displaySchema(schema, key = "") {
 //   return (
@@ -17,7 +18,10 @@ import PropTypes from "prop-types";
 //   );
 // }
 
-const getValue = (value) => {
+// i have to handle sub documents
+// array of sub documents
+// sub document containing references
+const getValue = (value, depth) => {
   if (typeof value === "object" && value !== null && !Array.isArray(value)) {
     if (value.type && value.type.toLowerCase() === "string") {
       if (value.required) {
@@ -60,17 +64,22 @@ const getValue = (value) => {
   } else if (Array.isArray(value)) {
     return <span>[ ] {getValue(value[0])}</span>;
   }
-  return JSON.stringify(value);
+
+  return DisplaySchema(value, depth);
 };
 
-const displaySchema = (schema) => {
+// shades of grey
+const colors = ["transparent", "#272727", "#202020", "#d0d0d0", "#c0c0c0"];
+
+const DisplaySchema = (schema, depth) => {
+  const color = colors[depth];
   return (
-    <div>
+    <div style={{ backgroundColor: color }}>
       {Object.entries(schema).map(([key, value]) => {
         return (
           <div className={classes.contents} key={key}>
             <span className={classes.keys}>{key}: </span>
-            <span className={classes.values}>{getValue(value)}</span>
+            <span className={classes.values}>{getValue(value, depth + 1)}</span>
           </div>
         );
       })}
@@ -86,7 +95,7 @@ function TextUpdaterNode({ data }) {
         <div className={classes.name}>
           <h3>{data.model}</h3>
         </div>
-        <div className={classes.schema}>{displaySchema(data.schema)}</div>
+        <div className={classes.schema}>{DisplaySchema(data.schema, 0)}</div>
       </div>
     </div>
   );

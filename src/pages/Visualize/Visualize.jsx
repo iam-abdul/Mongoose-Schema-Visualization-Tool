@@ -43,6 +43,24 @@ export default function Visualize({ models }) {
           },
           tags: [{ type: "Schema.Types.ObjectId", ref: "Tag", required: true }],
           mentions: [{ type: "string" }],
+          metaData: [
+            {
+              device: {
+                type: "String",
+              },
+              location: {
+                country: {
+                  type: "String",
+                },
+                city: [
+                  {
+                    type: "String",
+                    required: true,
+                  },
+                ],
+              },
+            },
+          ],
         },
       },
       type: "textUpdater",
