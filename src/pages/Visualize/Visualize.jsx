@@ -41,6 +41,8 @@ export default function Visualize({ models }) {
             ref: "User",
             required: true,
           },
+          tags: [{ type: "Schema.Types.ObjectId", ref: "Tag", required: true }],
+          mentions: [{ type: "string" }],
         },
       },
       type: "textUpdater",

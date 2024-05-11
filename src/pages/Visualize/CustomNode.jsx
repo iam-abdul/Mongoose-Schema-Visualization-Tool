@@ -47,6 +47,8 @@ const getValue = (value) => {
     }
 
     // return displaySchema(value);
+  } else if (Array.isArray(value)) {
+    return <span>[ ] {getValue(value[0])}</span>;
   }
   return JSON.stringify(value);
 };
