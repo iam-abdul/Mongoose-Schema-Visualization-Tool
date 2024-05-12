@@ -1,42 +1,25 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
-const comments = {
+const postSchema = new Schema({
   user: {
-    type: Schema.Types.ObjectId,
     ref: "User",
+    type: Schema.Types.ObjectId,
   },
   content: {
     type: String,
     required: true,
   },
-};
 
-const postSchema = new Schema({
-  user: [
-    {
-      ref: "User",
-      type: Schema.Types.ObjectId,
+  otp: {
+    type: Number,
+    required: true,
+  },
+  metadata: {
+    device: {
+      type: String,
     },
-  ],
-  // content: {
-  //   type: String,
-  //   required: true,
-  // },
-  // comments,
-  // otp: {
-  //   type: Number,
-  //   required: true,
-  // },
-  // metadata: {
-  //   device: {
-  //     type: String,
-  //   },
-  //   location: {
-  //     type: Schema.Types.ObjectId,
-  //     ref: "User",
-  //   },
-  // },
+  },
 });
 
 const Post = mongoose.model("Post", postSchema);

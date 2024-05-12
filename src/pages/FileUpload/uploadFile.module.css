@@ -3,11 +3,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  border: 2px dashed #aaa;
-  border-radius: 5px;
-  padding: 20px;
-  background-color: #f8f8f8;
+  height: 100%;
+  border: 1px dashed #aaa;
+
+  background-color: transparent;
+  box-sizing: border-box;
+  width: 50%;
+  color: #aaa;
 }
 .filesList {
   display: flex;
@@ -30,4 +32,57 @@
 }
 .minimize {
   display: none;
+}
+.parent {
+  display: flex;
+  flex-direction: row;
+  background-color: transparent;
+  justify-content: space-between;
+  gap: 10px;
+  height: 80vh;
+}
+.text {
+  width: 50%;
+}
+.textAreaContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 50%;
+
+  height: 100%;
+  width: 100%;
+  justify-content: space-between;
+}
+.textAreaContainer textarea {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+
+  font-family: "MyFont", sans-serif;
+  background-color: transparent;
+  color: #aaa;
+}
+.textAreaContainer textarea::placeholder {
+  font-family: "MyFont", sans-serif;
+}
+.textAreaContainer button {
+  width: 100%;
+  padding: 6px;
+  font-family: "MyFont", sans-serif;
+  border-radius: 0;
+  outline: none;
+  border: none;
+  background-color: white;
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
+}
+.textAreaContainer button:hover {
+  background-color: red;
+  color: white;
+}
+.or {
+  margin: auto 0;
+  color: #aaa;
 }

@@ -1,0 +1,23 @@
+.parent {
+  display: flex;
+  flex-direction: column;
+}
+
+.parent h1::first-letter {
+  color: red;
+}
+.heading {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.heading h1 {
+  height: 100%;
+  font-size: 1.3rem;
+  color: #aaa;
+
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.heading svg {
+}
