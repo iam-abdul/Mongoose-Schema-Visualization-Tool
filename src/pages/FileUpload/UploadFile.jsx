@@ -3,8 +3,6 @@ import classes from "./uploadFile.module.css";
 import { useDropzone } from "react-dropzone";
 import extractModel from "mongoose-parser";
 
-import { SiJavascript } from "react-icons/si";
-
 import PropTypes from "prop-types";
 
 const FileUpload = ({ setModels }) => {
@@ -54,21 +52,6 @@ const FileUpload = ({ setModels }) => {
           <p>Drag and drop some files here, or click to select files</p>
         )}
       </div>
-      <ul className={classes.filesList}>
-        {files.map((file) => (
-          <li key={file.path}>
-            <SiJavascript size={"1.3rem"} color="yellow" />
-            <span>{file.path}</span>
-            {/* <MdOutlineClose
-              //   onClick={() => {
-              //     setFiles(files.filter((f) => f.path !== file.path));
-              //     setModels((prev) => prev.filter((m) => m.path !== file.path));
-              //   }}
-              style={{ cursor: "pointer" }}
-            /> */}
-          </li>
-        ))}
-      </ul>
     </div>
   );
 };

@@ -1,3 +1,18 @@
 .parent div:first-child {
   /* overflow: auto !important; */
 }
+.layoutButtons {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  /* margin: 5px; */
+}
+
+.layoutButtons button {
+  padding: 5px;
+  border: none;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  border: solid 1px #353535;
+}
