@@ -1,8 +1,8 @@
 {
   "name": "mongoose-schema-visualize",
-  "homepage": "https://iam-abdul.github.io/Mongoose-Schema-Visualization-Tool/",
+  "homepage": "http://iam-abdul.github.io/Mongoose-Schema-Visualization-Tool/",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
