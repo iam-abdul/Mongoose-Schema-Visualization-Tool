@@ -1,6 +1,6 @@
 {
   "name": "mongoose-schema-visualize",
-  "homepage": "http://iam-abdul.github.io/Mongoose-Schema-Visualization-Tool/",
+  "homepage": "https://iam-abdul.github.io/Mongoose-Schema-Visualization-Tool/",
   "private": true,
   "version": "0.0.1",
   "type": "module",
@@ -15,7 +15,7 @@
   "dependencies": {
     "@dagrejs/dagre": "^1.1.2",
     "gh-pages": "^6.1.1",
-    "mongoose-parser": "^0.0.7",
+    "mongoose-parser": "^0.0.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",

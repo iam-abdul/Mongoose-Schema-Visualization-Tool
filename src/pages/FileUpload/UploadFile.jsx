@@ -11,9 +11,17 @@ const FileUpload = ({ setModels }) => {
   const onDrop = useCallback((acceptedFiles) => {
     acceptedFiles.forEach((file) => {
       // skip if it is not a js file
-      if (!file.path.endsWith(".js")) {
+      let fileType = "";
+      if (file.path.endsWith(".js")) {
+        fileType = ".js";
+      } else if (file.path.endsWith(".ts")) {
+        fileType = ".ts";
+      }
+
+      if (!fileType) {
         return;
       }
+
       const reader = new FileReader();
 
       reader.onabort = () => console.log("file reading was aborted");
@@ -23,7 +31,7 @@ const FileUpload = ({ setModels }) => {
         const binaryStr = reader.result;
 
         setModels((prev) => {
-          const model = extractModel(binaryStr);
+          const model = extractModel(binaryStr, fileType === ".ts");
           return [...prev, ...model];
         });
       };
