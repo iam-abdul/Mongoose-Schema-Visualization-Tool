@@ -48,7 +48,7 @@ const getValue = (value, depth, model, key) => {
             <span style={{ color: "red" }}>*</span>
             {value.ref} (_Id)
             <Handle
-              id={model + "-" + key}
+              id={model.toLowerCase() + "-" + key.toLowerCase()}
               style={{ left: "101%" }}
               type="source"
               position={Position.Right}
@@ -60,7 +60,7 @@ const getValue = (value, depth, model, key) => {
           <span style={{ position: "relative" }}>
             <span>{value.ref} (_Id)</span>
             <Handle
-              id={model + "-" + key}
+              id={model.toLowerCase() + "-" + key.toLowerCase()}
               style={{ left: "101%" }}
               type="source"
               position={Position.Right}
@@ -135,7 +135,7 @@ const DisplaySchema = (schema, depth, model) => {
                 {key === "_id" ? (
                   <Handle
                     style={{ right: "130%", left: "-30%" }}
-                    id={model + "-_id"}
+                    id={model.toLowerCase() + "-_id"}
                     type="target"
                     position={Position.Left}
                   />
