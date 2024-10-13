@@ -1,5 +1,7 @@
 # React + Vite
 
+Read the implementation here https://levelup.gitconnected.com/mongoose-schema-visualisation-tool-4efd628cc91e
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
